@@ -6,7 +6,6 @@ orbs:
   workflows:
   maven_test:
     jobs:
-        - run: npm install
       - run: npm run test:setup
 
       - save_cache:
