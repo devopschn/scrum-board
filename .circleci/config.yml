@@ -2,20 +2,8 @@ version: 2.1
 
 orbs:
   maven: circleci/maven@0.0.12
-  
-  workflows:
+
+workflows:
   maven_test:
     jobs:
-      - run: npm run test:setup
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-        
-      # run tests!
-      # - run: npm run test
-      - run: npm run test:ci:local
-
-      - store_test_results:
-          path: /scrum-board\scrum-app
+      - maven/test # checkout, build
