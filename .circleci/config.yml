@@ -6,4 +6,17 @@ orbs:
   workflows:
   maven_test:
     jobs:
-      - maven/test # checkout, build, test, and upload test results
+        - run: npm install
+      - run: npm run test:setup
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+        
+      # run tests!
+      # - run: npm run test
+      - run: npm run test:ci:local
+
+      - store_test_results:
+          path: /scrum-board\scrum-app
